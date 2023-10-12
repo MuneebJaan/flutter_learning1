@@ -1,146 +1,126 @@
 import 'package:flutter/material.dart';
-
+import 'package:google_fonts/google_fonts.dart';
+import 'dart:math';
 void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  Random random=Random();
+  int x =0;
+  @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        backgroundColor: Colors.white,
-        body: SafeArea(
-          child: Column(
-            children: [
-              SizedBox(
-                height: 40,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
+    return SafeArea(
+      child: MaterialApp(
+        theme: ThemeData(fontFamily: GoogleFonts.poppins().fontFamily),
+        home: Scaffold(
+
+          backgroundColor: Colors.amber.shade100,
+          body: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: SafeArea(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Image(
-                    height: 80,
-                    width: 80,
-                    image: AssetImage('assets/pic.jpg'),
-                  ),
                   SizedBox(
-                    width: 10,
+                    height: 20,
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  Center(
+                    child: Text(
+                      'Welcome to lottery app',
+                      style: TextStyle(
+                          fontFamily: GoogleFonts.poppins().fontFamily,
+                          fontSize: 25,
+                          fontWeight: FontWeight.w500),
+                    ),
+                  ),
+                  SizedBox(height: 150),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    // crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        'mentaince',
-                        style: TextStyle(fontSize: 30),
+                      Image(
+                          height: 80,
+                          width: 70,
+                          image: AssetImage(
+                            'assets/lottery.png',
+                          )),
+                      SizedBox(
+                        width: 10,
                       ),
-                      Text(
-                        'Box',
-                        style: TextStyle(fontSize: 20),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        //   mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Center(
+                              child: Text(
+                                'Lucky number for today is 7',
+                                style: TextStyle(
+                                    fontFamily: GoogleFonts.poppins().fontFamily,
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.w600),
+                              ))
+                        ],
                       ),
                     ],
                   ),
-                ],
-              ),
-              SizedBox(
-                height: 40,
-              ),
-              Center(
-                child: Text(
-                  'Login',
-                  style: TextStyle(fontSize: 25),
-                ),
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              Center(
-                child: Text(
-                  'my name is muneeb \nmy name is muneeb ',
-                  style: TextStyle(fontSize: 20),
-                ),
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 20),
-                child: TextFormField(
-                  decoration: InputDecoration(
-                    hintText: 'Email',
-                    fillColor: Colors.grey.shade100,
-                    filled: true,
-                    prefixIcon:const Icon(Icons.email,color:Colors.red ,),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                        borderSide:const BorderSide(color: Colors.red)),
+                  SizedBox(
+                    height: 25,
                   ),
-                  ),
-              ),
+                  Container(
+                    height:300 ,
+                    width: 400,
+                    decoration: BoxDecoration(
+                      color: Colors.grey.shade500,
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child:x==7? Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Icon(Icons.done_all_outlined,color: Colors.green.shade700,size: 50,),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Text('Congrates you have won the lottery',style: TextStyle(fontSize: 16,),),
+                      ],
+                    ) :Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Icon(Icons.error,color: Colors.red.shade700,size: 50,),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Text('Your number is $x better luck next time',style: TextStyle(fontSize: 16,),),
+                      ],
+                    ),
 
-              Padding(
-                padding: const EdgeInsets.only(left: 20,right: 20,),
-                child: TextFormField(
-                  decoration: InputDecoration(
+                  ),
+                ],
+              ),
+            ),
+          ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: (){
+             x=random.nextInt(10);
+             print(x);
+             setState(() {
 
-                    hintText: 'Password',
-                    fillColor: Colors.grey.shade100,
-                    filled: true,
-                    prefixIcon:const Icon(Icons.lock_open,color:Colors.red ,),
-                    enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide:const BorderSide(color: Colors.red)),
-                  ),
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 5,left: 250 ),
-                    child: Text('forget password?',style: TextStyle(decoration: TextDecoration.underline),),
-                  )
-                ],
-              ),
-              SizedBox(
-                height: 170,
-              ),
-              Container(
-                height: 50,
-                width: 350,
-                decoration: BoxDecoration(
-                  color: Colors.blue,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Center(
-                    child: Text(
-                  'Log in',
-                  style: TextStyle(fontSize: 18, color: Colors.white),
-                )),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Dont have an account? ',
-                    style: TextStyle(fontSize: 16),
-                  ),
-                  Text(
-                    'Sign in ',
-                    style: TextStyle(fontSize: 16),
-                  ),
-                ],
-              )
-            ],
+             });
+            },
+            child:x==7? Icon(Icons.done_all):Icon(Icons.refresh),
           ),
         ),
       ),
     );
   }
 }
+
